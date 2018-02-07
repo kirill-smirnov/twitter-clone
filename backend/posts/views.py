@@ -1,11 +1,28 @@
 from rest_framework.generics import RetrieveUpdateDestroyAPIView, ListCreateAPIView
+from rest_framework.response import Response
+from rest_framework import status
 
 from .models import Post
+from accounts.models import User
 from .serializers import PostSerializer
 
 class PostListView(ListCreateAPIView):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
+
+    def create(self, request, *args, **kwargs):
+        username = request.data.pop("username")
+        user = User.objects.get(username=username)
+        request.data["user"] = user.pk
+        
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        self.perform_create(serializer)
+        headers = self.get_success_headers(serializer.data)
+        return Response(serializer.data, \
+            status=status.HTTP_201_CREATED, \
+            headers=headers)
+
 
 class PostView(RetrieveUpdateDestroyAPIView):
     lookup_field = 'pk'
