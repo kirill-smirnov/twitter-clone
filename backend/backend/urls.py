@@ -10,7 +10,6 @@ from rest_framework.authtoken import views as rest_framework_views
 
 
 patterns = [
-    url(r'^admin/', admin.site.urls),
     url(r'^posts/$', posts.views.PostListView.as_view()),
     url(r'^posts/(?P<pk>\d+)/$', posts.views.PostView.as_view()),
     url(r'^users/$', accounts.views.UserListView.as_view()),
@@ -21,4 +20,6 @@ patterns = [
 
 urlpatterns = [
     url(r'^api/', include(patterns)),
+    url(r'^admin/', admin.site.urls),
+    url(r'^auth/$', accounts.views.ExampleView.as_view()),
 ]
