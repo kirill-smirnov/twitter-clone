@@ -5,7 +5,7 @@ const  AuthTabs = props => (
         {
             props.tabs.map((tab, i) => (
                 <li key={i} className="nav-item" onClick={() => props.handleClick(i)}>
-                    <a className={"nav-link " + (props.index === i ? "active" : "")} href="#">{tab}</a>
+                    <a className={"nav-link " + (props.tabIndex === i ? "active" : "")} href="#">{tab}</a>
                 </li>
             ))
         }

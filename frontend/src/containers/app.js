@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import logo from '../logo.svg';
+// import logo from '../logo.svg';
 import './app.css';
 
 import Header from '../components/header';
@@ -10,21 +10,16 @@ class App extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {};
+    this.state = {
+      user: null
+    };
   }
 
-  componentWillMount() {
-    this.setState({
-      data: {
-        isAuthenticated: false,
-      }
-    });
-  }
   render() {
     return (
       <div className="App">
-        <Header data={this.state.data} />
-        <Main data={this.state.data} />
+        <Header {...this.state} />
+        <Main {...this.state} />
         <Footer />
       </div>
     );

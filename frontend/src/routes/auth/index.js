@@ -13,18 +13,18 @@ export default class Auth extends Component {
         super(props);
         this.state = {
             isLogin: true,
-            index: 0,
+            tabIndex: 0,
             tabs,
         };
         this.handleTabClick = this.handleTabClick.bind(this);
     }
 
     handleTabClick(i, e) {
-        this.setState({ index: i, isLogin: (!i) });
+        this.setState({ tabIndex: i, isLogin: (!i) });
+
     }
 
     render() {
-        const {index} = this.state;
         return (
             <div className="auth ">
                 <AuthTabs handleClick={this.handleTabClick} {...this.state} />
