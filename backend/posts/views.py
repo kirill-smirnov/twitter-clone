@@ -10,14 +10,14 @@ class PostListView(ListCreateAPIView):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
 
-    def perform_create(self, serializer):
-        if request.data["username"]:
-            username = request.data.pop("username")
+    def perform_create(self, serializer): #TODO: Make security
+        if self.request.data["username"]:
+            username = self.request.data.pop("username")
             user = User.objects.get(username=username)
         
         else:
             user = self.request.user
-
+        print(user)
         serializer.save(user=user)
 
 
