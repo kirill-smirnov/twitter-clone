@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
 import Utils from '../utils';
+import AuthAPI from './auth/authAPI';
 
 import './header.css';
 
@@ -38,9 +39,9 @@ export default class Header extends Component {
                                 {
                                     this.state.centerMenu.map((tab, i) =>  {
                                         return (
-                                            <li className={
+                                            <li key={i} className={
                                                 "nav-item " + (this.state.activeTab === i ? 'active': '')
-                                                + (!(tab.showIfAnonimous && isAuthenticated) ? 'hide' : '')}
+                                                + ((tab.showIfAnonimous || isAuthenticated) ? '' : 'd-none')}
                                                 onClick={e => this.handleMenuItemClick(i, e)}
                                             >
                                                 <Link to={tab.url} className="nav-link">{tab.name}</Link>
@@ -51,7 +52,7 @@ export default class Header extends Component {
                             </ul>
                             {isAuthenticated ?
                             <ul class="navbar-nav navbar-right">
-                                <li className="nav-item"><Link to="/logout/" className="nav-link">Logout</Link></li>
+                                    <li className="nav-item"><Link to="/logout/" className="nav-link">Logout</Link></li> {/*onClick={() => AuthAPI.logout(this.props.render)}*/}
                             </ul>
                             : ""}
                         </div>

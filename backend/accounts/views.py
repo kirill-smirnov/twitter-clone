@@ -27,10 +27,11 @@ class UserView(RetrieveUpdateDestroyAPIView):
         username = self.kwargs.get('slug')
         return User.objects.get(username=username)
 
+# class LogoutView(APIView):
+#     queryset = User.objects.all()
 
-class ExampleView(APIView):
-    def post(self, request, **credentials):
-        from django.contrib.auth import authenticate
-        print(authenticate(request=request, **credentials))
-        return authenticate(request=request, **credentials)
-
+#     def get(self, request, format=None):
+#         # simply delete the token to force a login
+#         print(request.user)
+#         # request.user.auth_token.delete()
+#         return Response(status=status.HTTP_200_OK)

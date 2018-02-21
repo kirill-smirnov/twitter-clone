@@ -17,7 +17,6 @@ class PostListView(ListCreateAPIView):
         
         else:
             user = self.request.user
-        print(user)
         serializer.save(user=user)
 
 

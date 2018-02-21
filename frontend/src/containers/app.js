@@ -11,6 +11,7 @@ import Main from './main';
 export default class App extends Component {
   state = {
     isAuthenticated: Utils.isUserAuthenticated(),
+    // render: this.render
   }
 
   render() {

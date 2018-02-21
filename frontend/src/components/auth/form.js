@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import Lockr from 'lockr';
-import axios from 'axios';
+
+import AuthAPI from './authAPI';
 
 const FormComponent = props => {
     const { id, label, hint = "", value, onChange } = props;
@@ -40,19 +40,10 @@ class Form extends Component {
         const {username, password, repeatPassword} = this.state;
 
         if (this.props.isLogin) {
-            axios.post('http://localhost:8000/api/auth/', { username, password}
-            ).then(res => {
-                Lockr.set('userdata', { username, token: res.data.token });
-            }).catch(e => {
-                console.log(e);
-            })
+            AuthAPI.signin(username, password);
 
         } else {
-            if (password === repeatPassword) {
-
-            } else {
-                //TODO: error
-            }
+            AuthAPI.signup(username, password, repeatPassword);
         }
     }
 
