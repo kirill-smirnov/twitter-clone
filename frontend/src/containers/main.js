@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import {Switch, Route, Redirect} from 'react-router-dom';
 
-import isUserAutenticated from '../utils';
 import Auth from '../components/auth';
 import Feed from '../components/feed';
 
@@ -9,13 +8,7 @@ import './main.css';
 
 export default class extends Component {
     render() {
-        const isAuthenticated = isUserAutenticated();
-
-        // return (
-        //     <Tranding />
-        //     {isAuthenticated ? <Feed /> : <Auth />}
-        //     <UserInfoOrNone />
-        // )
+        const { isAuthenticated } = this.props;
 
         return (
             <main className="container-fluid" id="main">
