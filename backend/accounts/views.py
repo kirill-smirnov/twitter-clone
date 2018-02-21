@@ -9,7 +9,7 @@ from .serializers import UserSerializer
 class UserListView(ListCreateAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
-    permission_classes = (AllowAny, )
+    permission_classes = (AllowAny, ) # Allows to sign up everybody
 
     def perform_create(self, serializer):
         instance = serializer.save()
@@ -29,8 +29,8 @@ class UserView(RetrieveUpdateDestroyAPIView):
 
 
 class ExampleView(APIView):
-    def get(self, request, format=None):
-        return Response({
-            'user': str(request.user),
-            'auth': str(request.auth),
-        })
+    def post(self, request, **credentials):
+        from django.contrib.auth import authenticate
+        print(authenticate(request=request, **credentials))
+        return authenticate(request=request, **credentials)
+

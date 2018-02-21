@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
-import {Switch, Route} from 'react-router-dom';
+import {Switch, Route, Redirect} from 'react-router-dom';
 
-import Auth from '../routes/auth';
-import Feed from '../routes/feed';
+import isUserAutenticated from '../utils';
+import Auth from '../components/auth';
+import Feed from '../components/feed';
 
 import './main.css';
 
 export default class extends Component {
     render() {
-        const isAuthenticated = this.props.user !== null;
+        const isAuthenticated = isUserAutenticated();
 
         // return (
         //     <Tranding />
@@ -22,10 +23,15 @@ export default class extends Component {
                     <div className="col-lg-2 col-md-2 col-sm-12"> Trending </div>
                     <div className="col-lg-8 col-md-8 col-sm-12">
                         <Switch>
-                            <Route path="/" component={isAuthenticated ? Feed : Auth} />
+                            <Route exact path="/" render={
+                                () => (isAuthenticated ? (<Redirect to="/feed/" />) : <Auth />
+                                )} />
+                            <Route path="/feed/" render={
+                                () => (isAuthenticated ? <Feed /> : (<Redirect to="/" />)
+                                )} />
                         </Switch>
                     </div>
-                    <div className="col-lg-2 col-md-2 col-sm-12"> Section </div>
+                     <div className="col-lg-2 col-md-2 col-sm-12"> Section </div>
                 </div>
             </main>
         )

@@ -2,7 +2,7 @@ import React from 'react';
 
 import Form from './form';
 
-const AuthContent = props => (
+const AuthContent = props => ( 
     <div className="tab-content">
         <Form isLogin={props.isLogin} />
     </div>

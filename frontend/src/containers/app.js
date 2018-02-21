@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+
 // import logo from '../logo.svg';
 import './app.css';
 
@@ -6,14 +7,7 @@ import Header from '../components/header';
 import Footer from '../components/footer';
 import Main from './main';
 
-class App extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      user: null
-    };
-  }
+export default class App extends Component {
 
   render() {
     return (
@@ -25,5 +19,3 @@ class App extends Component {
     );
   }
 }
-
-export default App;
