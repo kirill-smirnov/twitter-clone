@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
 
 import AuthAPI from './authAPI';
 
@@ -24,7 +25,8 @@ class Form extends Component {
         this.state = {
             username: '',
             password: '',
-            repeatPassword: ''
+            repeatPassword: '',
+            action: null,
         }
 
         this.onChange = this.onChange.bind(this);
@@ -41,15 +43,25 @@ class Form extends Component {
 
         if (this.props.isLogin) {
             AuthAPI.signin(username, password);
-
+            this.setState({ action: 'login' });
         } else {
             AuthAPI.signup(username, password, repeatPassword);
+            this.setState({ action: 'signup' });
         }
     }
 
     render() {
         const {isLogin} = this.props;
-
+        
+        if (this.state.action === 'login') {
+            this.setState({ action: null });
+            return <Redirect to='/profile/' />
+        }
+        else if (this.state.action === 'signup') {
+            this.setState({ action: null });
+            return <Redirect to='/' />
+        }
+        
         return (
             <form onSubmit={this.onSubmit}>
                 <FormComponent id="username" label="Username" 

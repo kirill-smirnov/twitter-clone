@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 
 import Utils from '../utils';
 import AuthAPI from './auth/authAPI';
@@ -11,6 +11,7 @@ export default class Header extends Component {
         isMobileMenuShowing: false,
         centerMenu: Utils.getMenuRoutes(),
         activeTab: 0,
+        didLogout: false
     }
 
     handleMenuIconClick(e) {
@@ -21,8 +22,19 @@ export default class Header extends Component {
         this.setState({activeTab: i});
     }
 
+    handleLogout() {
+        if (AuthAPI.logout()) {
+            this.setState({didLogout: true});
+        }
+    }
+
     render() {
         const { isAuthenticated } = this.props;
+
+        if (this.state.didLogout) {
+            this.setState({ didLogout: false });
+            return <Redirect to='/' />
+        }
 
         return (
             <header>
@@ -41,7 +53,7 @@ export default class Header extends Component {
                                         return (
                                             <li key={i} className={
                                                 "nav-item " + (this.state.activeTab === i ? 'active': '')
-                                                + ((tab.showIfAnonimous || isAuthenticated) ? '' : 'd-none')}
+                                                + ((tab.showIfAnonimous || isAuthenticated()) ? '' : 'd-none')}
                                                 onClick={e => this.handleMenuItemClick(i, e)}
                                             >
                                                 <Link to={tab.url} className="nav-link">{tab.name}</Link>
@@ -50,9 +62,9 @@ export default class Header extends Component {
                                     })
                                 }
                             </ul>
-                            {isAuthenticated ?
+                            {isAuthenticated() ?
                             <ul class="navbar-nav navbar-right">
-                                    <li className="nav-item"><Link to="/logout/" className="nav-link">Logout</Link></li> {/*onClick={() => AuthAPI.logout(this.props.render)}*/}
+                                    <li className="nav-item"><a className="nav-link" onClick={this.handleLogout.bind(this)}>Logout</a></li> {/*onClick={() => AuthAPI.logout(this.props.render)}*/}
                             </ul>
                             : ""}
                         </div>

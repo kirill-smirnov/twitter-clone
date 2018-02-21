@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {Switch, Route, Redirect} from 'react-router-dom';
 
+import Utils from '../utils';
 import Auth from '../components/auth';
 import Feed from '../components/feed';
 
@@ -9,7 +10,7 @@ import './main.css';
 export default class extends Component {
     render() {
         const { isAuthenticated } = this.props;
-
+        
         return (
             <main className="container-fluid" id="main">
                 <div className="row">
@@ -17,10 +18,10 @@ export default class extends Component {
                     <div className="col-lg-8 col-md-8 col-sm-12">
                         <Switch>
                             <Route exact path="/" render={
-                                () => (isAuthenticated ? (<Redirect to="/feed/" />) : <Auth />
+                                () => (isAuthenticated() ? (<Redirect to="/feed/" />) : <Auth />
                                 )} />
                             <Route path="/feed/" render={
-                                () => (isAuthenticated ? <Feed /> : (<Redirect to="/" />)
+                                () => (isAuthenticated() ? <Feed /> : (<Redirect to="/" />)
                                 )} />
                         </Switch>
                     </div>

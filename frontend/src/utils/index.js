@@ -16,7 +16,7 @@ class Utils {
         return [
             {
                 name: 'Home',
-                url: '/home/',
+                url: '/',
                 showIfAnonimous: true
             },
             {
@@ -36,7 +36,7 @@ class Utils {
             }
         ]
     }
-    
+
     static log(msg) {
         console.log(msg);
     }

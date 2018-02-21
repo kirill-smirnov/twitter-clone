@@ -33,9 +33,9 @@ export default class AuthAPI {
         }
     }
 
-    static logout(appRender) {
+    static logout() {
         Lockr.rm('userdata');
         Utils.log("Logout");
-        appRender();
+        return true;
     }
 }   
