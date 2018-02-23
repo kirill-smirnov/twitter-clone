@@ -1,6 +1,6 @@
 # Schmitter app
 
-Just a Twitter parody.
+Just a Twitter clone.
 ***
 ## Architecture
 REST API :)
@@ -17,3 +17,5 @@ It should have following apps:
 ### Frontend
 * JavaScript ES2017
 * React.js
+* Bootstrap.css
+* axios
