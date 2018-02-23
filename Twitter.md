@@ -18,4 +18,5 @@ It should have following apps:
 * JavaScript ES2017
 * React.js
 * Bootstrap.css
-* axios
+* axios for AJAX
+* Lockr for localStorage
