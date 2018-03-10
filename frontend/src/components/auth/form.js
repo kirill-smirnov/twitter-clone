@@ -6,11 +6,17 @@ import AuthAPI from './authAPI';
 const FormComponent = props => {
     const { id, label, hint = "", value, onChange } = props;
     const placeholder = props.placeholder || "Type " + label;
+    const type = 
+        ['repeatPassword', 'password'].includes(id) 
+        ? 'password' :
+        (id === 'email' ? id : 'text');
+        
+
     return (
         <div className="form-group">
             <div>
                 <label htmlFor={id}>{label}</label>
-                <input type={label} className="form-control" id={id} required
+                <input type={type} className="form-control" id={id} required
                     placeholder={placeholder} defaultValue={value} onChange={e => onChange(id, e)} />
                 <small className="form-text text-muted">{hint}</small>
             </div>
