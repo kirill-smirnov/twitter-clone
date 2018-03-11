@@ -123,5 +123,7 @@ venv.bak/
 !.vscode/extensions.json
 .history
 
+*/migrations
+*/*/migrations
 
 # End of https://www.gitignore.io/api/django,python,visualstudiocode
