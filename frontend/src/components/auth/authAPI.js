@@ -2,7 +2,8 @@ import axios from 'axios';
 import Lockr from 'lockr';
 import Utils from '../../utils';
 
-const url = 'http://localhost:8000/api/';
+import '../../config';
+const url = config.url;
 
 export default class AuthAPI {
     static getToken() {
