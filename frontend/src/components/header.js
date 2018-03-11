@@ -24,7 +24,7 @@ export default class Header extends Component {
 
     handleLogout() {
         if (AuthAPI.logout()) {
-            this.setState({didLogout: true});
+            this.props.changeUser(null);
         }
     }
 
@@ -35,7 +35,6 @@ export default class Header extends Component {
             this.setState({ didLogout: false });
             return <Redirect to='/' />
         }
-
         return (
             <header>
                 <nav className="navbar navbar-dark bg-dark navbar-expand-md">

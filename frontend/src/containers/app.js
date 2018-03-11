@@ -7,19 +7,27 @@ import './app.css';
 import Header from '../components/header';
 import Footer from '../components/footer';
 import Main from './main';
+import AuthAPI from '../components/auth/authAPI';
 
 export default class App extends Component {
   state = {
-    isAuthenticated: Utils.isUserAuthenticated,
-    // render: this.render
+    user: AuthAPI.getUsername,
+  }
+
+  changeUser(user) {
+    this.setState({user});
+  }
+
+  isAuthenticated() {
+    return this.state.user != null;
   }
 
   render() {
 
     return (
       <div className="App">
-        <Header {...this.state} />
-        <Main {...this.state} />
+        <Header {...this.state} isAuthenticated={this.isAuthenticated.bind(this)} changeUser={this.changeUser.bind(this)}/>
+        <Main {...this.state} isAuthenticated={this.isAuthenticated.bind(this)} changeUser={this.changeUser.bind(this)} />
         <Footer />
       </div>
     );

@@ -2,18 +2,22 @@ import axios from 'axios';
 import Lockr from 'lockr';
 import Utils from '../../utils';
 
-import '../../config';
+import config from '../../config';
 const url = config.url;
 
 export default class AuthAPI {
     static getToken() {
-        return Lockr.get('userdata').token;
+        return Lockr.get('user').token;
+    }
+
+    static getUsername() {
+        return Lockr.get('user').username;
     }
 
     static signin(username, password) {
         axios.post(url+'login/', { username, password })
             .then(res => {
-                Lockr.set('userdata', { username, token: res.data.token });
+                Lockr.set('user', { username, token: res.data.token });
                 Utils.log("User logged in");
             }).catch(e => {
                 Utils.log(e);
@@ -22,7 +26,7 @@ export default class AuthAPI {
 
     static signup(username, password, repeatPassword) {
         if (password === repeatPassword) {
-            axios.post(url+'users/', { username, password })
+            return axios.post(url+'users/', { username, password })
                 .then(res => {
                     Utils.log("User created");
                 }).catch(e => {
@@ -35,7 +39,7 @@ export default class AuthAPI {
     }
 
     static logout() {
-        Lockr.rm('userdata');
+        Lockr.rm('user');
         Utils.log("Logout");
         return true;
     }

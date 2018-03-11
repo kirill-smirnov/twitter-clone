@@ -49,6 +49,8 @@ class Form extends Component {
 
         if (this.props.isLogin) {
             AuthAPI.signin(username, password);
+            this.props.changeUser(username);
+            
             this.setState({ action: 'login' });
         } else {
             AuthAPI.signup(username, password, repeatPassword);
@@ -57,7 +59,7 @@ class Form extends Component {
     }
 
     render() {
-        const {isLogin} = this.props;
+        const {isLogin, changeUser} = this.props;
         
         if (this.state.action === 'login') {
             this.setState({ action: null });

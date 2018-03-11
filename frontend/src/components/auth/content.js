@@ -4,7 +4,7 @@ import Form from './form';
 
 const AuthContent = props => ( 
     <div className="tab-content">
-        <Form isLogin={props.isLogin} tabIndex={props.tabIndex} />
+        <Form {...props} />
     </div>
 )
 

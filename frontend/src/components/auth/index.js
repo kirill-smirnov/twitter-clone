@@ -28,7 +28,7 @@ export default class Auth extends Component {
         return (
             <div className="auth">
                 <AuthTabs handleClick={this.handleTabClick} {...this.state} />
-                <AuthContent {...this.state} />
+                <AuthContent {...this.state} changeUser={this.props.changeUser} />
             </div>
         )
     }

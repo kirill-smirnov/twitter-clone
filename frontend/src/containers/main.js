@@ -18,10 +18,10 @@ export default class extends Component {
                     <div className="col-lg-8 col-md-8 col-sm-12">
                         <Switch>
                             <Route exact path="/" render={
-                                () => (isAuthenticated() ? (<Redirect to="/feed/" />) : <Auth />
+                                () => (isAuthenticated() ? (<Redirect to="/feed/" />) : <Auth changeUser={this.props.changeUser} />
                                 )} />
                             <Route path="/feed/" render={
-                                () => (isAuthenticated() ? <Feed /> : (<Redirect to="/" />)
+                                () => (isAuthenticated() ? <Feed changeUser={this.props.changeUser} /> : (<Redirect to="/" />)
                                 )} />
                         </Switch>
                     </div>
