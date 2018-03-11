@@ -8,7 +8,8 @@ from django.contrib.auth.models import AbstractUser
 
 class User(AbstractUser):
     username = models.SlugField(max_length=150, unique=True)
-
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
 @receiver(post_save, sender=settings.AUTH_USER_MODEL)
 def create_auth_token(sender, instance=None, created=False, **kwargs):
