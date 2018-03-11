@@ -28,9 +28,8 @@ class PostView(RetrieveUpdateDestroyAPIView):
     lookup_field = 'pk'
     serializer_class = PostSerializer
     
-    def get_queryset(self):
-        
-        return Post.objects.all()
+    def get_queryset(self):    
+        return Post.objects.order_by('-created_at')
 
     def get_perform(self, serializer):
         serializer.save(user=self.request.user)
