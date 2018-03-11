@@ -24,7 +24,7 @@ export default class AuthAPI {
             })
     }
 
-    static signup(username, password, repeatPassword) {
+    static signup(username, password, repeatPassword) { console.log("signup")
         if (password === repeatPassword) {
             return axios.post(url+'users/', { username, password })
                 .then(res => {
